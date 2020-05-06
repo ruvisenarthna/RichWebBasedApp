@@ -70,7 +70,7 @@ function onDoctorSaveComplete(response, status) {
 		}
 
 			$("#hidDoctorIDSave").val("");
-			$("#formDoctor")[0].reset();
+			$("#formDoctor")[0].reset(true);
 	}
 
 
@@ -94,6 +94,8 @@ $("#m_doctor_dateOfJoin").val($(this).closest("tr").find('td:eq(12)').text());
 $("#m_doctor_fees").val($(this).closest("tr").find('td:eq(13)').text());
 $("#m_doctor_workingDays").val($(this).closest("tr").find('td:eq(14)').text());
 });
+
+
 
 $(document).on("click", ".btnRemove", function(event) {
 

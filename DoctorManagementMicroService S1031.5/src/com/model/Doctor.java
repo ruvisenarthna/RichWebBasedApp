@@ -165,7 +165,7 @@ public class Doctor {
 
 				// Add into the html table
 				output += "<tr><td><input type='hidden'  id='hidDoctorIDUpdate' name='hidDoctorIDUpdate' value='"
-						+ m_SLMCNO + "'>" + m_SLMCNO + "</td>";
+						+ m_SLMCNO + "'></td>";
 				output += "<td>" + m_SLMCNO + "</td>";
 				output += "<td>" + m_doctor_userName + "</td>";
 				output += "<td>" + m_doctor_password  + "</td>";
