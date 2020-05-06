@@ -112,11 +112,15 @@ public class Doctor {
 			preparedStmt.execute();
 			con.close();
 
-			output = "Doctor Details Inserted successfully";
+
+			String newDoctor = readDoctor();
+			output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 		} catch (Exception e) {
-			output = "Error while inserting the Doctor Details .";
+			output = "{\"status\":\"error\", \"data\":         \"Error while inserting the Doctor.\"}";
 			System.err.println(e.getMessage());
 		}
+		 
+		 
 
 		return output;
 
@@ -136,7 +140,7 @@ public class Doctor {
 			}
 
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>m_SLMCNO</th><th>m_doctor_name</th><th>m_doctor_address</th><th>m_doctor_speciality</th><th>m_doctor_sex</th><th>m_doctor_dateOfBirth</th>><th>m_doctor_qualification</th><th>m_doctor_email</th><th>m_doctor_phone</th><th>m_doctor_dateOfJoin</th><th>m_doctor_fees</th><th>m_doctor_workingDays</th><th>Update</th></tr>";
+			output = "<table border=\'1\'><tr><th></th><th>m_SLMCNO</th><th>User Name</th><th>Password</th><th>Name</th><th>Addresss</th><th>Speciality</th><th>Gender</th><th>Date of Birth</th>><th>Qualification</th><th>Email</th><th>Contact No:</th><th>Date of Join</th><th>Doctor Fees</th><th>Working Days</th><th>Update</th><th>Delete</th></tr>";
 
 			String query = "select * from m_doctor";
 			Statement stmt = con.createStatement();
@@ -146,6 +150,8 @@ public class Doctor {
 			while (rs.next()) {
 				String m_SLMCNO = rs.getString("m_SLMCNO");
 				String m_doctor_name = rs.getString("m_doctor_name");
+				String m_doctor_userName = rs.getString("m_doctor_userName");
+				String m_doctor_password  = rs.getString("m_doctor_password");
 				String m_doctor_address = rs.getString("m_doctor_address");
 				String m_doctor_speciality = rs.getString("m_doctor_speciality");
 				String m_doctor_sex = rs.getString("m_doctor_sex");
@@ -158,7 +164,11 @@ public class Doctor {
 				String m_doctor_workingDays = rs.getString("m_doctor_workingDays");
 
 				// Add into the html table
-				output += "<tr><td>" + m_SLMCNO + "</td>";
+				output += "<tr><td><input type='hidden'  id='hidDoctorIDUpdate' name='hidDoctorIDUpdate' value='"
+						+ m_SLMCNO + "'>" + m_SLMCNO + "</td>";
+				output += "<td>" + m_SLMCNO + "</td>";
+				output += "<td>" + m_doctor_userName + "</td>";
+				output += "<td>" + m_doctor_password  + "</td>";
 				output += "<td>" + m_doctor_name + "</td>";
 				output += "<td>" + m_doctor_address + "</td>";
 				output += "<td>" + m_doctor_speciality + "</td>";
@@ -172,9 +182,11 @@ public class Doctor {
 				output += "<td>" + m_doctor_workingDays + "</td>";
 				;
 
+			
 				// buttons
-				output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\"btn btn-secondary\"></td>"
-						+ "<td><form method=\"post\" action=\"Doctor.jsp\">";
+			output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-t_payment_no='"+ rs.getString("m_SLMCNO") + "'>" 
+					 + "</td></tr>";
+
 
 			}
 
@@ -185,6 +197,8 @@ public class Doctor {
 		} catch (Exception e) {
 			output = "Error while reading the Details.";
 			System.err.println(e.getMessage());
+			
+			
 		}
 
 		return output;
@@ -229,10 +243,10 @@ public class Doctor {
 			preparedStmt.execute();
 			con.close();
 
-			output = "Updated successfully";
-
+			String newDoctor = readDoctor();
+			output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 		} catch (Exception e) {
-			output = "Error while updating the Doctor Details.";
+			output = "{\"status\":\"error\", \"data\":         \"Error while Updating the Doctor.\"}";
 			System.err.println(e.getMessage());
 		}
 
@@ -241,7 +255,7 @@ public class Doctor {
 	}
 
 	public String deleteDoctor(String m_SLMCNO) {
-
+		System.out.println("Inside model delete"+ m_SLMCNO);
 		String output = "";
 
 		try {
@@ -267,12 +281,11 @@ public class Doctor {
 			preparedStmt.execute();
 			con.close();
 
-			output = "Deleted successfully";
-
+			String newDoctor = readDoctor();
+			output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 		} catch (Exception e) {
-			output = "Error while deleting the Doctor.";
+			output = "{\"status\":\"error\", \"data\":         \"Error while Deleting the Doctor.\"}";
 			System.err.println(e.getMessage());
-
 		}
 
 		return output;

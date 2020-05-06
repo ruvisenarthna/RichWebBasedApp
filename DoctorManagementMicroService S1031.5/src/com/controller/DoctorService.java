@@ -123,12 +123,12 @@ public class DoctorService {
 		Double m_doctor_fees = docObject.get("m_doctor_fees").getAsDouble();
 		String m_doctor_workingDays = docObject.get("m_doctor_workingDays").getAsString();
 
-		String output = doctor.insertDoctor(m_SLMCNO, m_doctor_name, m_doctor_userName, m_doctor_password,
+/*		String output = doctor.insertDoctor(m_SLMCNO, m_doctor_name, m_doctor_userName, m_doctor_password,
 				m_doctor_address, m_doctor_speciality, m_doctor_sex, Date.valueOf(m_doctor_dateOfBirth),
 				m_doctor_qualification, m_doctor_email, m_doctor_phone, Date.valueOf(m_doctor_dateOfJoin),
 				m_doctor_fees, m_doctor_workingDays);
-
-		return output;
+*/
+		return null;
 	}
 
 }
